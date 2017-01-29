@@ -1,5 +1,4 @@
 require 'page-object'
-require 'pry'
 
 class Store
   include PageObject
