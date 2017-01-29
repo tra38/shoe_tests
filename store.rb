@@ -6,12 +6,6 @@ class Store
 
   page_url("https://shoestore-manheim.rhcloud.com")
 
-  # def see_shoes_for(month)
-  #   @browser.visit
-
-  #   @browser.goto("https://shoestore-manheim.rhcloud.com/months/#{month}")
-  # end
-
   def see_all_shoes
     @browser.goto("https://shoestore-manheim.rhcloud.com/shoes")
   end
