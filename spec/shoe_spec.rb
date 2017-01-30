@@ -55,4 +55,4 @@ describe "Store " do
 end
 
 
-# BUGS DISCOVEERD - no images present on November page
+# BUGS DISCOVEERD - no images present on November page, <script>alert('XSS')</script> causes an 'internal service error'
