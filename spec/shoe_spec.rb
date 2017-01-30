@@ -43,7 +43,7 @@ describe "Store " do
       @remind_form = @store.remind_form
     end
 
-    ["bob@example.com", "<script>alert('XSS')</script>", "not really an email"].each do |string|
+    ["bob@example.com", "<script>alert('XSS')</script>", "not really an email", "email.with.periods+and+symbols@example.com", %{"quotation marks"@example.com}].each do |string|
       it "submits the email '#{string}' " do
         @remind_form.email = "#{string}"
         @remind_form.submit
