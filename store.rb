@@ -1,4 +1,6 @@
 require 'page-object'
+require_relative 'shoe'
+require_relative 'form'
 
 class Store
   include PageObject
@@ -45,73 +47,4 @@ class Store
     flash_element.text
   end
 
-end
-
-class Shoe
-  include PageObject
-  attr_reader :brand, :name, :price, :description, :release_month, :image, :form
-
-  def initialize(table_element)
-    @brand = table_element[0][1].text
-    @name = table_element[1][1].text
-    @price = table_element[2][1].text
-    @description = table_element[3][1].text
-    @release_month = table_element[4][1].text
-    @image = table_element[5][0].image_element
-    if table_element[6].exists?
-      @form = Form.new(table_element[6][0].form_element)
-    else
-      @form = nil
-    end
-  end
-
-  def image_present?
-    image.visible?
-  end
-
-  def description_present?
-    !description.empty?
-  end
-
-  def price_present?
-    !price.empty?
-  end
-end
-
-class Form
-  attr_reader :form_element, :textbox
-  def initialize(form_element)
-    @form_element = form_element
-    if form_element.exists?
-      @textbox = form_element.text_field_element
-    end
-  end
-
-  def present?
-    form_element.exists?
-  end
-
-  def email=(email_address)
-    if present?
-      @textbox.value = email_address
-    else
-      raise "No Form Element Present"
-    end
-  end
-
-  def email
-    if present?
-      @textbox.value
-    else
-      raise "No Form Element Present"
-    end
-  end
-
-  def submit
-    if present?
-      form_element.submit
-    else
-      raise "No Form Element Present"
-    end
-  end
 end
