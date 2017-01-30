@@ -2,16 +2,17 @@ require "spec_helper"
 require "date"
 require_relative "../store"
 
-describe "Store " do
-  before do
-    @store = Store.new(@browser)
-    @store.goto
-  end
+def visit_homepage
+  @store = Store.new(@browser)
+  @store.goto
+end
 
+describe "Store " do
   ["January", "February",  "March",  "April", "May", "June", "July", "August", "September", "October", "November", "December"].each do |month|
 
     describe "#{month} tests" do
-      before do
+      before(:all) do
+        visit_homepage
         @store.send(:"view_#{month.downcase}_shoes")
         @month_shoes = @store.shoes
       end
@@ -38,6 +39,7 @@ describe "Store " do
 
   describe "sign up for emails on upcoming releases for shoes and receive a confirmation message" do
     before do
+      visit_homepage
       @remind_form = @store.remind_form
     end
 
